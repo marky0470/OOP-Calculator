@@ -56,7 +56,7 @@ class CalculatorGUI():
             textvariable=self.calculatorText,
             justify=tkinter.RIGHT,
             state=tkinter.DISABLED,
-            font=("Arial", 40),
+            font=("Consolas", 40),
             relief=tkinter.FLAT,
             insertborderwidth=0,
             selectborderwidth=0,
@@ -140,7 +140,7 @@ class CalculatorGUI():
             width=self.buttonWidth,
             background=self.normalButtonColor,
             onHoverBackground=self.normalButtonAccentColor,
-            onClick="",
+            onClick=lambda : self.service.numberClick(7),
             column=0,
             row=0
         )
@@ -151,7 +151,7 @@ class CalculatorGUI():
             width=self.buttonWidth,
             background=self.normalButtonColor,
             onHoverBackground=self.normalButtonAccentColor,
-            onClick="",
+            onClick=lambda : self.service.numberClick(8),
             column=1,
             row=0
         )
@@ -162,7 +162,7 @@ class CalculatorGUI():
             width=self.buttonWidth,
             background=self.normalButtonColor,
             onHoverBackground=self.normalButtonAccentColor,
-            onClick="",
+            onClick=lambda : self.service.numberClick(9),
             column=2,
             row=0
         )
@@ -199,7 +199,7 @@ class CalculatorGUI():
             width=self.buttonWidth,
             background=self.normalButtonColor,
             onHoverBackground=self.normalButtonAccentColor,
-            onClick="",
+            onClick=lambda : self.service.numberClick(4),
             column=0,
             row=0
         )
@@ -210,7 +210,7 @@ class CalculatorGUI():
             width=self.buttonWidth,
             background=self.normalButtonColor,
             onHoverBackground=self.normalButtonAccentColor,
-            onClick="",
+            onClick=lambda : self.service.numberClick(5),
             column=1,
             row=0
         )
@@ -221,7 +221,7 @@ class CalculatorGUI():
             width=self.buttonWidth,
             background=self.normalButtonColor,
             onHoverBackground=self.normalButtonAccentColor,
-            onClick="",
+            onClick=lambda : self.service.numberClick(6),
             column=2,
             row=0
         )
@@ -257,7 +257,7 @@ class CalculatorGUI():
             width=self.buttonWidth,
             background=self.normalButtonColor,
             onHoverBackground=self.normalButtonAccentColor,
-            onClick="",
+            onClick=lambda : self.service.numberClick(1),
             column=0,
             row=0
         )
@@ -268,7 +268,7 @@ class CalculatorGUI():
             width=self.buttonWidth,
             background=self.normalButtonColor,
             onHoverBackground=self.normalButtonAccentColor,
-            onClick="",
+            onClick=lambda : self.service.numberClick(2),
             column=1,
             row=0
         )
@@ -279,7 +279,7 @@ class CalculatorGUI():
             width=self.buttonWidth,
             background=self.normalButtonColor,
             onHoverBackground=self.normalButtonAccentColor,
-            onClick="",
+            onClick=lambda : self.service.numberClick(3),
             column=2,
             row=0
         )
@@ -316,7 +316,7 @@ class CalculatorGUI():
             width=self.buttonWidth,
             background=self.normalButtonColor,
             onHoverBackground=self.normalButtonAccentColor,
-            onClick="",
+            onClick = lambda : self.service.numberClick(0),
             column=0,
             row=0,
         )
