@@ -1,5 +1,6 @@
 
 import tkinter
+from unittest import result
 
 class CalculatorService():
 
@@ -28,11 +29,9 @@ class CalculatorService():
         if operator not in operators:
             self.listOfOperatorButtons.append([operator, button])
 
-        operatorMap = {"ADDITION" : '+', "SUBTRACTION" : '-', "MULTIPLICATION" : '*', "DIVISION" : '/'}
-
-        self.inputs.append(int(self.currentInput))
+        if self.currentInput:
+            self.inputs.append(self.convertToNum(self.currentInput))
         self.currentInput = ""
-        self.calculatorTextVariable.set(self.calculatorTextVariable.get() + ' ' + operatorMap[operator])
 
         self.__manageOperatorButtonBindings(operator, bg)
 
@@ -48,18 +47,17 @@ class CalculatorService():
         print('Clicked: Clear')
 
     def backspace(self):
-        #Code here
+        if self.currentInput == "0" or self.operator != "DEFAULT":
+            return
+        self.currentInput = self.currentInput[:-1]
+        self.calculatorTextVariable.set(self.currentInput)
         print('Clicked: Backspace')
 
     def evaluate(self):
-        print(self.inputs)
         if not self.currentInput:
             return    
         
-        self.inputs.append(int(self.currentInput))
-        print(self.inputs)
-        if len(self.inputs) != 2:
-            return
+        self.inputs.append(self.convertToNum(self.currentInput))
         
         if self.operator == "ADDITION":
             result = self.inputs[0] + self.inputs[1]
@@ -71,6 +69,9 @@ class CalculatorService():
             result = self.inputs[0] / self.inputs[1]
         elif self.operator == "DEFAULT":
             return
+
+        decimalPlace = max([len(str(float(x)).split('.')[1]) for x in self.inputs])
+        result = round(result, decimalPlace)
         
         self.inputs = [result]
         self.currentInput = ""
@@ -79,19 +80,34 @@ class CalculatorService():
         self.operator = "DEFAULT"
         self.__manageOperatorButtonBindings("DEFAULT", "")
 
-        #print('Clicked: Evaluate')
+        print('Clicked: Evaluate')
 
     def percentage(self):
-        #Code here
+        if not self.inputs:
+            return
+        self.inputs[0] /= 100
+        self.calculatorTextVariable.set(str(self.inputs[0]))
         print('Clicked: Percentage')
 
     def decimal(self):
-        #Code here
+        if len(self.currentInput.split('.')) == 2:
+            return
+        self.currentInput += (".")
+        self.calculatorTextVariable.set(self.currentInput)
         print('Clicked: Decimal')
 
     def positiveNegative(self):
-        #Code here
+        if not self.currentInput:
+            return
+        self.currentInput = str(self.convertToNum(self.currentInput) * -1)
+        self.calculatorTextVariable.set(self.currentInput)
         print('Clicked: Positive Negative')
+
+    def convertToNum(self, num):
+        try: 
+            return int(num)
+        except ValueError:
+            return float(num)
 
     def numberClick(self, num):
         self.currentInput += str(num)
